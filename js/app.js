@@ -18,7 +18,7 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    if (this.x<=600) {
+    if (this.x <= 600) {
         this.x+=this.speed*dt;
     }else{
         this.reset();
@@ -45,8 +45,15 @@ var Player = function(){
     this.y=400;
 };
 
+Player.prototype.checkcollision = function(enemy){
+    if (Math.abs(this.y-enemy.y)<=50 && Math.abs(this.x-enemy.x)<=50) {
+        this.x=200;
+        this.y=400;
+    }
+};
+
 Player.prototype.update = function(){
-    allEnemies.forEach(checkcollision,this);
+    allEnemies.forEach(player.checkcollision,this);
 };
 
 Player.prototype.render=function(){
@@ -56,7 +63,7 @@ Player.prototype.render=function(){
 Player.prototype.reset=function(){
     this.y=400;
     this.x=200;
-}
+};
 
 Player.prototype.handleInput=function(i){
     if(i=='up'){
@@ -83,19 +90,20 @@ Player.prototype.handleInput=function(i){
     }
 };
 
-function checkcollision(enemy){
-    if (Math.abs(this.y-enemy.y)<=50 && Math.abs(this.x-enemy.x)<=50) {
-        this.x=200;
-        this.y=400;
-    }
-};
+// function checkcollision(enemy){
+//     if (Math.abs(this.y-enemy.y)<=50 && Math.abs(this.x-enemy.x)<=50) {
+//         this.x=200;
+//         this.y=400;
+//     }
+// };
 
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
-var allEnemies = new Array();
+//var allEnemies = new Array();
+var allEnemies = [];
 
 var enemy1 = new Enemy();
 var enemy2 = new Enemy();
@@ -105,7 +113,7 @@ allEnemies.push(enemy1);
 allEnemies.push(enemy2);
 allEnemies.push(enemy3);
 // allEnemies.push(enemy4);
-var player = new Player;
+var player = new Player();
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
