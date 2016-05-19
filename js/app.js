@@ -1,3 +1,4 @@
+"use strict";
 // Enemies our player must avoid
 var Enemy = function() {
     // Variables applied to each of our instances go here,
@@ -53,7 +54,7 @@ Player.prototype.checkcollision = function(enemy){
 };
 
 Player.prototype.update = function(){
-    allEnemies.forEach(player.checkcollision,this);
+    allEnemies.forEach(this.checkcollision,this);
 };
 
 Player.prototype.render=function(){
